@@ -14,6 +14,7 @@ import net.ostis.common.sctpclient.model.ScIterator;
 import net.ostis.common.sctpclient.model.ScParameter;
 
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -49,7 +50,7 @@ public class Iterator5Test extends AbstractIntegrationTest {
 		super.setupClient();
 	}
 
-    @BeforeTest(dependsOnMethods = "setupClient")
+    @BeforeTest
     public void setupElements() throws SctpClientException {
         el1 = client.createElement(SC_TYPE_NODE).getAnswer();
         el3 = client.createElement(SC_TYPE_NODE).getAnswer();

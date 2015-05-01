@@ -1,6 +1,5 @@
 package net.ostis.common.sctpclient.exception;
 
-import java.io.IOException;
 
 @SuppressWarnings("serial")
 public class TransportException extends SctpClientException {

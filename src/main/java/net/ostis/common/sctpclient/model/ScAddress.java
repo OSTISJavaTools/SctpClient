@@ -3,54 +3,46 @@ package net.ostis.common.sctpclient.model;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import net.ostis.common.sctpclient.constants.ScParameterSize;
 
 public class ScAddress implements ScParameter {
 
-    private short segment;
+    private int segment;
 
-    private short offset;
-
-    public ScAddress(short segment, short offset) {
-
-        this.segment = segment;
-        this.offset = offset;
-    }
+    private int offset;
 
     public ScAddress(int segment, int offset) {
 
-        this((short) segment, (short) offset);
-
-    }
-
-    public short getSegment() {
-
-        return segment;
-    }
-
-    public void setSegment(short segment) {
-
         this.segment = segment;
-    }
-
-    public short getOffset() {
-
-        return offset;
-    }
-
-    public void setOffset(short offset) {
-
         this.offset = offset;
     }
+    
+    public int getSegment() {
+		return segment;
+	}
 
-    @Override
+	public void setSegment(int segment) {
+		this.segment = segment;
+	}
+
+	public int getOffset() {
+		return offset;
+	}
+
+	public void setOffset(int offset) {
+		this.offset = offset;
+	}
+
+	@Override
     public byte[] getBytes() {
 
         ByteBuffer tempBuffer = ByteBuffer.allocate(ScParameterSize.SC_ADDRESS.getSize());
         tempBuffer.order(ByteOrder.LITTLE_ENDIAN);
-        tempBuffer.putShort(segment);
-        tempBuffer.putShort(offset);
-        return tempBuffer.array();
+        byte[] segmentArray = {(byte)(segment), (byte)(segment >> 8) };
+        byte[] offsetArray = {(byte)(offset), (byte)(offset >> 8)};
+        return ArrayUtils.addAll(segmentArray, offsetArray);
     }
 
     @Override

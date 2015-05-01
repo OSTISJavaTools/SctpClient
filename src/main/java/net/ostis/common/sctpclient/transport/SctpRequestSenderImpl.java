@@ -15,58 +15,62 @@ import net.ostis.common.sctpclient.model.response.SctpResponse;
 
 public class SctpRequestSenderImpl implements SctpRequestSender {
 
-    private InputStream inputStream;
+	private InputStream inputStream;
 
-    private OutputStream outputStream;
+	private OutputStream outputStream;
 
-    private Socket socket;
+	private Socket socket;
 
-    public SctpRequestSenderImpl() {
+	public SctpRequestSenderImpl() {
 
-        super();
-    }
+		super();
+	}
 
-    @Override
-    public void init(String host, int port) throws InitializationException {
+	@Override
+	public void init(String host, int port) throws InitializationException {
 
-        try {
-            socket = new Socket(host, port);
-            inputStream = socket.getInputStream();
-            outputStream = socket.getOutputStream();
-        } catch (IOException e) {
-            throw new InitializationException(ErrorMessage.TRANSPORT_INIT_ERROR);
-        }
-    }
+		try {
+			socket = new Socket(host, port);
+			inputStream = socket.getInputStream();
+			outputStream = socket.getOutputStream();
+		} catch (IOException e) {
+			throw new InitializationException(ErrorMessage.TRANSPORT_INIT_ERROR);
+		}
+	}
 
-    @Override
-    public void shutdown() throws ShutdownException {
+	@Override
+	public void shutdown() throws ShutdownException {
 
-        try {
-            closeResources();
-        } catch (IOException e) {
-            throw new ShutdownException(ErrorMessage.SHUTDOWN_ERROR);
-        }
-    }
+		try {
+			closeResources();
+		} catch (IOException e) {
+			throw new ShutdownException(ErrorMessage.SHUTDOWN_ERROR);
+		}
+	}
 
-    private void closeResources() throws IOException {
+	private void closeResources() throws IOException {
 
-        socket.close();
-        inputStream.close();
-        outputStream.close();
-    }
+		socket.close();
+		inputStream.close();
+		outputStream.close();
+	}
 
-    @Override
-    public <Type> SctpResponse<Type> sendRequest(SctpRequest request) throws SctpClientException {
+	@Override
+	public <Type> SctpResponse<Type> sendRequest(SctpRequest request)
+			throws SctpClientException {
 
-        try {
-            byte[] data = SctpRequestBytesBuilder.build(request);
-            outputStream.write(data);
-        } catch (IOException e) {
-            throw new TransportException(ErrorMessage.REQUEST_SEND_ERROR);
-        }
-        SctpResponseBuilder<Type> responseBuilder = new BytesSctpResponseBuilder<Type>();
-        SctpResponse<Type> sctpResponse = responseBuilder.build(inputStream, request);
-        return sctpResponse;
-    }
+		try {
+			byte[] data = SctpRequestBytesBuilder.build(request);
+			outputStream.write(data);
+//			outputStream.flush();
+			SctpResponseBuilder<Type> responseBuilder = new BytesSctpResponseBuilder<Type>();
+			SctpResponse<Type> sctpResponse = responseBuilder.build(
+					inputStream, request);
+			return sctpResponse;
+		} catch (IOException e) {
+			throw new TransportException(ErrorMessage.REQUEST_SEND_ERROR);
+		}
+		
+	}
 
 }

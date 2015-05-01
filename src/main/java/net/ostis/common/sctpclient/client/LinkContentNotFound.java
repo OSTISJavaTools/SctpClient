@@ -3,7 +3,6 @@
  */
 package net.ostis.common.sctpclient.client;
 
-import net.ostis.common.sctpclient.model.ScAddress;
 
 /**
  * @author Andrew Nepogoda Mar 21, 2015

@@ -7,7 +7,6 @@ import java.nio.ByteOrder;
 
 import net.ostis.common.sctpclient.constants.SctpCommandType;
 import net.ostis.common.sctpclient.exception.ErrorMessage;
-import net.ostis.common.sctpclient.exception.IllegalResultCodeException;
 import net.ostis.common.sctpclient.exception.SctpClientException;
 import net.ostis.common.sctpclient.exception.TransportException;
 import net.ostis.common.sctpclient.model.request.SctpRequest;

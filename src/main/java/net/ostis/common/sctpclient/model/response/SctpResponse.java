@@ -1,6 +1,5 @@
 package net.ostis.common.sctpclient.model.response;
 
-import net.ostis.common.sctpclient.model.ScAddress;
 
 public class SctpResponse<T> {
 

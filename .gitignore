@@ -1,10 +1,8 @@
 target/
-
-# Eclipse specific files # 
 *.settings
 *.project
 *.classpath
-
+log/
 test-output/
 pom.xml.tag
 pom.xml.releaseBackup
@@ -27,13 +25,10 @@ tmp/
 *.swp
 *~.nib
 local.properties
-.settings/
 .loadpath
-.project
 .externalToolBuilders/
 *.launch
 .cproject
-.classpath
 .buildpath
 .target
 .texlipse

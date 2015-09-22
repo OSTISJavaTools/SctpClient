@@ -8,12 +8,12 @@ package net.ostis.common.sctpclient.client;
  * @author Andrew Nepogoda Mar 21, 2015
  */
 @SuppressWarnings("serial")
-public class LinkContentNotFound extends Exception {
+public class LinkContentNotFoundException extends Exception {
 
     /**
      * 
      */
-    public LinkContentNotFound() {
+    public LinkContentNotFoundException() {
 
         super();
     }
@@ -21,7 +21,7 @@ public class LinkContentNotFound extends Exception {
     /**
      * @param message
      */
-    public LinkContentNotFound(String message) {
+    public LinkContentNotFoundException(String message) {
 
         super(message);
     }
